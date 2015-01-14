@@ -20,6 +20,8 @@
 
 #import "BPTextViewController.h"
 #import <Bypass.h>
+#import <SDWebImageDownloader.h>
+#import <SDWebImageManager.h>
 
 @interface BPTextViewController ()
 @property (weak, nonatomic) IBOutlet UITextView         *markdownView;
@@ -33,7 +35,7 @@
  */
 - (IBAction)textViewWasTapped:(id)sender
 {
-    CGPoint position = [sender locationInView:[self markdownView]];
+    CGPoint position = [sender locationInView:[self view]];
     position.y += [[self markdownView] contentOffset].y;
 
     UITextPosition *tapApproximation = [[self markdownView] closestPositionToPoint:position];
@@ -48,7 +50,9 @@
     // as a string into the attributes dictionary of a link.
     
     if ([self attributedText].length != 0 ) {
-        
+        if (self.attributedText.length <= characterIndex) {
+            return;
+        }
         NSDictionary *attributes = [[self  attributedText] attributesAtIndex:characterIndex effectiveRange:&effectiveRange];
         NSString *linkHREF = attributes[BPLinkStyleAttributeName];
         
@@ -57,6 +61,8 @@
             [[UIApplication sharedApplication] openURL:linkURL];
         }
     }
+//    [[SDWebImageManager sharedManager] downloadImageWithURL:<#(NSURL *)#> options:<#(SDWebImageOptions)#> progress:<#^(NSInteger receivedSize, NSInteger expectedSize)progressBlock#> completed:<#^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL)completedBlock#>]
+   
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -65,8 +71,38 @@
     
     BPParser *parser = [[BPParser alloc] init];
     BPDocument *document = [parser parse:sample];
+    for (BPElement *element in [document elements]) {
+        for (BPElement *ce in element.childElements) {
+            if ([ce elementType] == BPImage) {
+                NSString *imglink = ce[@"link"];
+                NSLog(@"link :%@", imglink);
+                if (imglink) {
+
+                    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imglink] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+                        ;
+                    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                        
+                    }];
+                    
+                }
+            }
+        }
+       
+        if ([element elementType] == BPImage) {
+            NSString *imglink = element[@"link"];
+            NSLog(@"link :%@", imglink);
+            
+        }
+    }
     
     BPAttributedStringConverter *converter = [[BPAttributedStringConverter alloc] init];
+    [[converter displaySettings] setDefaultColor:[UIColor brownColor]];
+//    [[converter displaySettings] setLinkColor:[UIColor redColor]];
+//    [[converter displaySettings] setCodeColor:[UIColor redColor]];
+//    [[converter displaySettings] setQuoteColor:[UIColor redColor]];
+//    [[converter displaySettings] setQuoteFont:[UIFont italicSystemFontOfSize:13.f]];
+//    [[converter displaySettings] setBoldItalicFont:[UIFont italicSystemFontOfSize:15.f]];
+    
     NSAttributedString *attributedText = [converter convertDocument:document];
     
     // Warning: The attributed text is being set on a simple UITextView out of convenience. After this has been done,
@@ -75,6 +111,7 @@
     
     [self setAttributedText:attributedText];
     [[self markdownView] setAttributedText:attributedText];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated

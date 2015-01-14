@@ -288,7 +288,7 @@
 			name = BypassTests;
 			productName = BypassTests;
 			productReference = 5E5BC82916E004FA00165503 /* BypassTests.octest */;
-			productType = "com.apple.product-type.bundle";
+			productType = "com.apple.product-type.bundle.ocunit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -453,7 +453,7 @@
 		5E5BC83E16E004FA00165503 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BOOST_HOME = /usr/local/include;
+				BOOST_HOME = /Users/xzm/tools/boost_1_53_0/;
 				DSTROOT = /tmp/Bypass.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bypass/Bypass-Prefix.pch";
@@ -462,13 +462,14 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
 		5E5BC83F16E004FA00165503 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				BOOST_HOME = /usr/local/include;
+				BOOST_HOME = /Users/xzm/tools/boost_1_53_0/;
 				DSTROOT = /tmp/Bypass.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bypass/Bypass-Prefix.pch";
@@ -477,6 +478,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

@@ -22,7 +22,7 @@
 #import "BPDocument.h"
 #import "BPMarkdownPageView.h"
 
-#define SHOW_ATTRIBUTES_ON_TAP 0
+#define SHOW_ATTRIBUTES_ON_TAP 1
 
 void
 BPContextFlipVertical(CGContextRef context, CGRect rect)

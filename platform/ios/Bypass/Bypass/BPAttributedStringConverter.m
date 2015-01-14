@@ -49,8 +49,8 @@ NSString *const BPLinkStyleAttributeName = @"NSLinkAttributeName";
     for (BPElement *element in [document elements]) {
         [self convertElement:element toTarget:target];
     }
-
-    [target addAttribute:NSForegroundColorAttributeName value:[_displaySettings defaultColor] range:NSMakeRange(0, target.length)];
+    
+//    [target addAttribute:NSForegroundColorAttributeName value:[_displaySettings defaultColor] range:NSMakeRange(0, target.length)];
     
     return target;
 }
@@ -82,6 +82,9 @@ NSString *const BPLinkStyleAttributeName = @"NSLinkAttributeName";
         [self renderItalicElement:element toTarget:target];
     } else if (elementType == BPImage) {
         // Currently not supported
+        //test
+        [self renderImageElement:element toTarget:target];
+        
     } else if (elementType == BPLineBreak) {
         [self renderLineBreak:element toTarget:target];
     } else if (elementType == BPLink) {
@@ -180,7 +183,28 @@ NSString *const BPLinkStyleAttributeName = @"NSLinkAttributeName";
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:text
                                                                              attributes:attributes];
         [target appendAttributedString:attributedText];
+        
     }
+}
+
+- (void)renderImageElement:(BPElement *)element toTarget:(NSMutableAttributedString *)target{
+    //TODO
+    UIImage *image = [UIImage imageNamed:@"iPhone.png"];
+    NSString *link = element[@"link"];
+    if (link) {
+
+        [UIImage imageWithContentsOfFile:@"todo"];
+    }
+    
+    NSTextAttachment *ta = [[NSTextAttachment alloc] init];
+    ta.image = image;
+
+    NSAttributedString *attach = [NSAttributedString attributedStringWithAttachment:ta];
+    NSMutableAttributedString *ma = [[NSMutableAttributedString alloc] initWithAttributedString:attach];
+    
+
+    [target appendAttributedString:ma];
+    
 }
 
 - (void)renderTextElement:(BPElement *)element toTarget:(NSMutableAttributedString *)target
