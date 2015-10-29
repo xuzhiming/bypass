@@ -67,51 +67,74 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:animated];
     NSString *sample = [self sampleMarkdown];
     
     BPParser *parser = [[BPParser alloc] init];
     BPDocument *document = [parser parse:sample];
+    NSMutableArray *imgElements = [NSMutableArray array];
+    
     for (BPElement *element in [document elements]) {
         for (BPElement *ce in element.childElements) {
             if ([ce elementType] == BPImage) {
                 NSString *imglink = ce[@"link"];
                 NSLog(@"link :%@", imglink);
                 if (imglink) {
-
-                    [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:imglink] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
-                        ;
-                    } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
-                        
-                    }];
-                    
+                    [imgElements addObject:ce];
                 }
             }
         }
        
         if ([element elementType] == BPImage) {
             NSString *imglink = element[@"link"];
+            if (imglink) {
+                [imgElements addObject:element];
+            }
             NSLog(@"link :%@", imglink);
             
         }
     }
     
-    BPAttributedStringConverter *converter = [[BPAttributedStringConverter alloc] init];
-    [[converter displaySettings] setDefaultColor:[UIColor brownColor]];
-//    [[converter displaySettings] setLinkColor:[UIColor redColor]];
-//    [[converter displaySettings] setCodeColor:[UIColor redColor]];
-//    [[converter displaySettings] setQuoteColor:[UIColor redColor]];
-//    [[converter displaySettings] setQuoteFont:[UIFont italicSystemFontOfSize:13.f]];
-//    [[converter displaySettings] setBoldItalicFont:[UIFont italicSystemFontOfSize:15.f]];
     
-    NSAttributedString *attributedText = [converter convertDocument:document];
+    NSUInteger imgcount = imgElements.count;
+    __block int downloadCount = 0;
+    [imgElements enumerateObjectsUsingBlock:^(BPElement *element, NSUInteger idx, BOOL * _Nonnull stop) {
+        [[SDWebImageDownloader sharedDownloader] downloadImageWithURL:[NSURL URLWithString:element[@"link"]] options:0 progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+            
+        } completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+            element.image = image;
+            downloadCount++;
+            if (downloadCount == imgcount) {
+                [self renderDoc:document];
+            }
+        }];
+    }];
     
-    // Warning: The attributed text is being set on a simple UITextView out of convenience. After this has been done,
-    //          Bypass' custom text attributes have been stripped. We save a copy to use as a point of reference for
-    //          user taps.
     
-    [self setAttributedText:attributedText];
-    [[self markdownView] setAttributedText:attributedText];
+}
 
+-(void)renderDoc:(BPDocument *)document{
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        BPAttributedStringConverter *converter = [[BPAttributedStringConverter alloc] init];
+        [[converter displaySettings] setDefaultColor:[UIColor brownColor]];
+        //    [[converter displaySettings] setLinkColor:[UIColor redColor]];
+        //    [[converter displaySettings] setCodeColor:[UIColor redColor]];
+        //    [[converter displaySettings] setQuoteColor:[UIColor redColor]];
+        //    [[converter displaySettings] setQuoteFont:[UIFont italicSystemFontOfSize:13.f]];
+        //    [[converter displaySettings] setBoldItalicFont:[UIFont italicSystemFontOfSize:15.f]];
+        
+        NSAttributedString *attributedText = [converter convertDocument:document];
+        
+        // Warning: The attributed text is being set on a simple UITextView out of convenience. After this has been done,
+        //          Bypass' custom text attributes have been stripped. We save a copy to use as a point of reference for
+        //          user taps.
+        
+        [self setAttributedText:attributedText];
+        [[self markdownView] setAttributedText:attributedText];
+        
+    });
 }
 
 - (void)viewDidAppear:(BOOL)animated

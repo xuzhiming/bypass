@@ -139,7 +139,12 @@ NSString *const BPLinkStyleAttributeName = @"NSLinkAttributeName";
 
 - (void)insertLineSeparatorIntoTarget:(NSMutableAttributedString *)target
 {
-    [target appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\u2028"]];
+//    [target appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\u2028"]];
+    if (NSFoundationVersionNumber > NSFoundationVersionNumber_iOS_8_3) {
+        [target appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\r"]];
+    } else {
+        [target appendAttributedString:[[NSMutableAttributedString alloc] initWithString:@"\u2028"]];
+    }
 }
 
 #pragma mark Span Element Rendering
@@ -189,12 +194,12 @@ NSString *const BPLinkStyleAttributeName = @"NSLinkAttributeName";
 
 - (void)renderImageElement:(BPElement *)element toTarget:(NSMutableAttributedString *)target{
     //TODO
-    UIImage *image = [UIImage imageNamed:@"iPhone.png"];
-    NSString *link = element[@"link"];
-    if (link) {
-
-        [UIImage imageWithContentsOfFile:@"todo"];
-    }
+    
+    UIImage *image = element.image;// = [UIImage imageNamed:@"iPhone.png"];
+//    NSString *link = element[@"link"];
+//    if (link) {
+//        [UIImage imageWithContentsOfFile:@"todo"];
+//    }
     
     NSTextAttachment *ta = [[NSTextAttachment alloc] init];
     ta.image = image;

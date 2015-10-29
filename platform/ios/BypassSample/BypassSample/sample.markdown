@@ -1,3 +1,4 @@
+![test link](https://cdn.monetizejs.com/resources/button-32.png)  
 
 > -
 > -
@@ -5,9 +6,13 @@
 ***bolditalic***
 
 
-[![test link](https://cdn.monetizejs.com/resources/button-32.png)](http://www.baidu.com)
+![test link](https://cdn.monetizejs.com/resources/button-32.png)  
 
-![](http://ts3.mm.bing.net/th?id=HN.608039031631577362&pid=1.7)
+>  http://www.baidu.com  
+>  1
+>  2
+
+![](https://cdn.monetizejs.com/resources/button-32.png)
 
 
 #Header sizes

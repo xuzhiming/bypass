@@ -19,6 +19,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 typedef NSUInteger BPElementType;
 
@@ -56,6 +57,7 @@ FOUNDATION_EXPORT const BPElementType BPStrikethrough;
 @property (strong, nonatomic, readonly) NSDictionary  *attributes;
 @property (weak,   nonatomic, readonly) BPElement     *parentElement;
 @property (strong, nonatomic, readonly) NSArray       *childElements;
+@property (strong, nonatomic) UIImage *image;
 
 - (BOOL)isBlockElement;
 

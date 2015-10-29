@@ -19,7 +19,6 @@
 		5E5BC7AE16E0049800165503 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC7AD16E0049800165503 /* Default-568h@2x.png */; };
 		5E5BC7B116E0049800165503 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC7AF16E0049800165503 /* MainStoryboard.storyboard */; };
 		5E5BC7B416E0049800165503 /* BPTextViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 5E5BC7B316E0049800165503 /* BPTextViewController.mm */; };
-		5E5BC7BC16E0049900165503 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BC7BB16E0049900165503 /* SenTestingKit.framework */; };
 		5E5BC7BD16E0049900165503 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BC79716E0049800165503 /* UIKit.framework */; };
 		5E5BC7BE16E0049900165503 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E5BC79916E0049800165503 /* Foundation.framework */; };
 		5E5BC7C616E0049900165503 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5E5BC7C416E0049900165503 /* InfoPlist.strings */; };
@@ -88,8 +87,7 @@
 		5E5BC7B016E0049800165503 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
 		5E5BC7B216E0049800165503 /* BPTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BPTextViewController.h; sourceTree = "<group>"; };
 		5E5BC7B316E0049800165503 /* BPTextViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = BPTextViewController.mm; sourceTree = "<group>"; };
-		5E5BC7BA16E0049900165503 /* BypassSampleTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BypassSampleTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5E5BC7BB16E0049900165503 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		5E5BC7BA16E0049900165503 /* BypassSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BypassSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E5BC7C316E0049900165503 /* BypassSampleTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BypassSampleTests-Info.plist"; sourceTree = "<group>"; };
 		5E5BC7C516E0049900165503 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		5E5BC7C716E0049900165503 /* BypassSampleTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BypassSampleTests.h; sourceTree = "<group>"; };
@@ -130,7 +128,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E5BC7BC16E0049900165503 /* SenTestingKit.framework in Frameworks */,
 				5E5BC7BD16E0049900165503 /* UIKit.framework in Frameworks */,
 				5E5BC7BE16E0049900165503 /* Foundation.framework in Frameworks */,
 			);
@@ -157,7 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				5E5BC79416E0049800165503 /* BypassSample.app */,
-				5E5BC7BA16E0049900165503 /* BypassSampleTests.octest */,
+				5E5BC7BA16E0049900165503 /* BypassSampleTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -168,7 +165,6 @@
 				5E5BC79B16E0049800165503 /* CoreGraphics.framework */,
 				5E5BC8A216E7C25700165503 /* CoreText.framework */,
 				5E5BC79916E0049800165503 /* Foundation.framework */,
-				5E5BC7BB16E0049900165503 /* SenTestingKit.framework */,
 				5E007AF116FA325100F8CFFD /* QuartzCore.framework */,
 				5E5BC79716E0049800165503 /* UIKit.framework */,
 				134F5C671F91336531685D49 /* libPods.a */,
@@ -320,8 +316,8 @@
 			);
 			name = BypassSampleTests;
 			productName = BypassSampleTests;
-			productReference = 5E5BC7BA16E0049900165503 /* BypassSampleTests.octest */;
-			productType = "com.apple.product-type.bundle.ocunit-test";
+			productReference = 5E5BC7BA16E0049900165503 /* BypassSampleTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -330,6 +326,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = BP;
+				LastTestingUpgradeCheck = 0710;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = Uncodin;
 				TargetAttributes = {
@@ -544,7 +541,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -568,7 +565,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -587,7 +584,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "BypassSample/BypassSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -609,7 +606,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "BypassSample/BypassSample-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"$(inherited)",
@@ -626,6 +623,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BypassSample/BypassSample-Prefix.pch";
@@ -633,7 +631,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -644,6 +641,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
 					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+					"$(inherited)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BypassSample/BypassSample-Prefix.pch";
@@ -651,7 +649,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};

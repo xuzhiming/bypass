@@ -6,8 +6,8 @@
 //  Copyright (c) 2013 Uncodin. All rights reserved.
 //
 
-#import <SenTestingKit/SenTestingKit.h>
+#import <XCTest/XCTest.h>
 
-@interface BypassSampleTests : SenTestCase
+@interface BypassSampleTests : XCTestCase
 
 @end
