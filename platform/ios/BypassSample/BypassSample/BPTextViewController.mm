@@ -110,7 +110,7 @@
         }];
     }];
     
-    
+    [self renderDoc:document];
 }
 
 -(void)renderDoc:(BPDocument *)document{
